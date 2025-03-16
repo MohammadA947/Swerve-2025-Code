@@ -149,7 +149,7 @@ public class RobotContainer {
         //   driveJoystick.leftBumper().onTrue(drivetrain.runOnce(() -> drivetrain.seedFieldCentric()));
         //   drivetrain.registerTelemetry(logger::telemeterize);
  
-        //slower drive hopefully
+        //slower drive
         driveJoystick.rightTrigger().whileTrue( drivetrain.applyRequest(() ->
         drive.withVelocityX(-(driveJoystick.getLeftY() * MaxSpeed)/10) // Drive forward with negative Y (forward)
             .withVelocityY(-(driveJoystick.getLeftX() * MaxSpeed)/10) // Drive left with negative X (left)
@@ -175,7 +175,7 @@ public class RobotContainer {
         driveJoystick.b().whileTrue(new InstantCommand( () -> m_Coral.stop()));                               //Driver emergency stops coral motors
         //driveJoystick.rightBumper().whileTrue( new InstantCommand( () -> m_Coral.slowerbackwards()));       //Temporary until its figured out in deposit
         
-        //driveJoystick.rightBumper().whileTrue(new AlignToReefTagRelative(false, drivetrain));
+        driveJoystick.leftTrigger().whileTrue(new AlignToReefTagRelative(false, drivetrain)); // DOES NOT CURRENTLY DEPLOY
         //driveJoystick.leftBumper().whileTrue(new BTest(m_Coral ));
         
         
@@ -183,8 +183,6 @@ public class RobotContainer {
         // driveJoystick.leftBumper().whileTrue(new InstantCommand( () -> m_Coral.backwards()));
 
 
-
-        
         // Manual Coral Button Code
         //driveJoystick.x().whileTrue(new InstantCommand( () -> m_Coral.slowerbackwards()));
         //driveJoystick.b().whileTrue(new InstantCommand( () -> m_Coral.forward()));
@@ -195,37 +193,11 @@ public class RobotContainer {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // Elevator Manual Controls
-        // driveJoystick.pov(270).whileTrue(new InstantCommand( () -> m_Elevator.manualstop()));
-        // driveJoystick.rightBumper().whileTrue(new ElevatorUpTest(m_Elevator));
-        // driveJoystick.leftBumper().whileTrue(new ElevatorDownTest(m_Elevator));
-
-        // Elevator Button Bindings
-        // driveJoystick.a().whileTrue(new ElevatorStartingPosition(m_Elevator));
-        // driveJoystick.pov(0).whileTrue(new ElevatorFirstLevel(m_Elevator));
-        // driveJoystick.pov(90).whileTrue(new ElevatorSecondLevel(m_Elevator));
-        // driveJoystick.pov(180).whileTrue(new ElevatorThirdLevel(m_Elevator));
-        // driveJoystick.rightTrigger().whileTrue(new ElevatorFourthLevel(m_Elevator));
-        // driveJoystick.rightTrigger().whileTrue( new LimelightOrientationCmd(m_Limelight, drivetrain));
-
         // Algae Code
         opJoystick.leftBumper().whileTrue(new AlgaeIntake(m_Algae));
         driveJoystick.leftBumper().whileTrue(new AlgaeDrop(m_Algae));
         opJoystick.pov(0).whileTrue(new InstantCommand( ()-> m_Algae.moveArmUpPosition()));
-        //opJoystick.pov(90).whileTrue(new AlignToReefTagRelative(false, drivetrain));
+        
         opJoystick.pov(180).whileTrue(new InstantCommand( ()-> m_Algae.moveArmRestingPosition()));
         
 
@@ -240,12 +212,8 @@ public class RobotContainer {
         // driveJoystick.pov(0).whileTrue(new CoralTakeTillFull(m_Coral));       // <--Just Shooter
         // driveJoystick.b().whileTrue(new CoralTakeTillFull(m_Coral, m_CANdle));   // <--Shooter and LED
 
-        // LED Code
-        opJoystick.rightBumper().whileTrue(new CANdleConfigs.ConfigBrightness(m_CANdle, 1.0));
-        // opJoystick.pov(90).whileTrue(new CANdleConfigs.ConfigBrightness(m_CANdle, 0.3));
-        // opJoystick.pov(180).whileTrue(new CANdleConfigs.ConfigBrightness(m_CANdle, 0));
-        // opJoystick.pov(270).whileTrue(new TestLEDs(m_CANdle));
-        // driveJoystick.leftBumper().whileTrue(new InstantCommand( () -> m_CANdle.changeAnimation(AnimationTypes.SolidGreen)));
+    
+    
     }
 
     public Command getAutonomousCommand() {
